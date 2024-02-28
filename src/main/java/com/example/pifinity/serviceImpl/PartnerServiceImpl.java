@@ -24,6 +24,7 @@ EmailService emailService;
   //  }
     @Override
     public Partner addPartner(Partner partner) {
+        //partner.setNbtransaction(0);
         // Calcul du seuil de rentabilité
         double breakEvenPoint = (double) partner.getChargesfixes() / partner.getChiffredaffaires();
 

@@ -29,7 +29,7 @@ public class Partner implements Serializable {
    BankAccount bankAccount;
 
     @ToString.Exclude
-    @OneToOne
+    @OneToOne(mappedBy="partner")
     private Advertising advertising;
 
 

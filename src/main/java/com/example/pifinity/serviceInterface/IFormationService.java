@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IFormationService {
     List<Formation> findAllFormations();
-    Formation addFormation(Formation formation);
+    Formation addFormation(Long partnerid, Formation formation);
     Formation updateFormation (Long formationid ,Formation formation);
     Formation findByIdFormation (Long formationid);
     void deleteFormation(Long formationid);

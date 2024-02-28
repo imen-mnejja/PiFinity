@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service; // Importez cette classe
 
 @Service // Ajoutez cette annotation pour indiquer que c'est un service géré par Spring
 public class QRCodeService {
-
     public byte[] generateQRCode(String text) throws IOException {
         ByteArrayOutputStream outputStream = QRCode.from(text).to(ImageType.PNG).stream();
         return outputStream.toByteArray();

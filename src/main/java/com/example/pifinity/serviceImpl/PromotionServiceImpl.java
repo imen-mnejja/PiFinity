@@ -53,8 +53,9 @@ public class PromotionServiceImpl implements IPromotionService {
     public Promotion updatePromotion(Long promoid, Promotion updatedPromotion) {
         Promotion existingPromotion = findByIdPromotion(promoid);
         existingPromotion.setDescrption(updatedPromotion.getDescrption());
-        existingPromotion.setPromo(updatedPromotion.getPromo());
+      //  existingPromotion.setPromo(updatedPromotion.getPromo());
         existingPromotion.setCateg(updatedPromotion.getCateg());
+        //existingPromotion.getPartner(updatedPromotion.getPartner());
         return promotionRepo.save(existingPromotion);
 
     }
@@ -62,9 +63,8 @@ public class PromotionServiceImpl implements IPromotionService {
     @Override
     public Promotion findByIdPromotion(Long promoid) {
         return promotionRepo.findById(promoid)
-                .orElseThrow(() -> new IllegalArgumentException("Partner not found with ID: " + promoid));
+                .orElseThrow(() -> new IllegalArgumentException("promo not found with ID: " + promoid));
     }
-
     @Override
     public void deletePromotion(Long promoid) {
         promotionRepo.deleteById(promoid);

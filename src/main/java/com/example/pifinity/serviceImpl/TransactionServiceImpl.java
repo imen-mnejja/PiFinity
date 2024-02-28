@@ -57,7 +57,7 @@ EmailService emailService;
                 String subject = "Seuil de transactions atteint";
                 String text = "Le partenaire avec l'ID " + partner.getPartnerid() + " a atteint le seuil de 5 transactions.";
                 emailService.sendEmail("manar.boukhris@esprit.tn", subject, text);
-            }
+           }
 
         }
     }

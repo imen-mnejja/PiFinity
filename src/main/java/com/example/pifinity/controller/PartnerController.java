@@ -34,6 +34,7 @@ private IPartnerService partnerService;
     @PostMapping()
     public ResponseEntity<Object> addPartner(@RequestBody Partner partner) {
         try {
+            partner.setNbtransaction(0);
             // Calcul du seuil de rentabilité
             double breakEvenPoint = (double) partner.getChargesfixes() / partner.getChiffredaffaires();
 

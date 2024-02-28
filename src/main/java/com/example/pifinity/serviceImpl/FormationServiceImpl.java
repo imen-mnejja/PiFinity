@@ -3,6 +3,7 @@ package com.example.pifinity.serviceImpl;
 import com.example.pifinity.entity.Formation;
 import com.example.pifinity.entity.Partner;
 import com.example.pifinity.repository.FormationRepo;
+import com.example.pifinity.repository.PartnerRepo;
 import com.example.pifinity.serviceInterface.IFormationService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,14 +14,17 @@ import java.util.List;
 @AllArgsConstructor
 public class FormationServiceImpl implements IFormationService {
     FormationRepo formationRepo;
-
+    PartnerRepo partnerRepo;
     @Override
     public List<Formation> findAllFormations() {
         return formationRepo.findAll();
     }
 
     @Override
-    public Formation addFormation(Formation formation) {
+    public Formation addFormation(Long partnerid ,Formation formation) {
+        Partner partner = partnerRepo.findById(partnerid)
+                .orElseThrow(() -> new IllegalArgumentException("Partenaire non trouvé avec l'ID : " + partnerid));
+        formation.setPartner(partner);
         return formationRepo.save(formation);
     }
 

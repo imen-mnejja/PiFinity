@@ -21,10 +21,7 @@ PartnerRepo partnerRepo;
         return advertisingRepo.findAll();
     }
 
-    //@Override
-   // public Advertising addAdvertising(Advertising advertising) {
-       // return advertisingRepo.save(advertising);
-   // }
+
     @Override
     public Advertising addAdvertising(Long partnerid, Advertising advertising) {
         // Récupération du partenaire associé à l'ID spécifié
@@ -32,7 +29,7 @@ PartnerRepo partnerRepo;
                 .orElseThrow(() -> new IllegalArgumentException("Partenaire non trouvé avec l'ID : " + partnerid));
 
         // Vérification du nombre de transactions du partenaire
-        if (partner.getNbtransaction() != null && partner.getNbtransaction() >= 2) {
+        if (partner.getNbtransaction() != null && partner.getNbtransaction() >= 5) {
             advertising.setPartner(partner);
             Advertising savedAdvertising = advertisingRepo.save(advertising);
 
@@ -42,16 +39,17 @@ PartnerRepo partnerRepo;
 
             return savedAdvertising;
         } else {
-            throw new IllegalArgumentException("Le partenaire avec l'ID : " + partnerid + " doit avoir au moins 2 transactions pour ajouter de la publicité.");
+            throw new IllegalArgumentException("Le partenaire avec l'ID : " + partnerid + " doit avoir au moins 5 transactions pour ajouter de la publicité.");
         }
     }
     @Override
     public Advertising updateAdvertising(Long pubid, Advertising updatedAdvertising) {
         Advertising existingAdvertising = findByIdAdvertising(pubid);
-        existingAdvertising.setDescription(updatedAdvertising.getDescription());
+        existingAdvertising.setDescription
+                (updatedAdvertising.getDescription());
         existingAdvertising.setType(updatedAdvertising.getType());
         existingAdvertising.setTitre(updatedAdvertising.getTitre());
-        return advertisingRepo.save(updatedAdvertising);
+        return advertisingRepo.save(existingAdvertising);
     }
 
     @Override

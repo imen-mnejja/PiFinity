@@ -37,11 +37,7 @@ public class TransactionController {
         transactionService.deleteTransaction(idtransaction);
     }
 
-    /*   @PostMapping
-       public Transaction addTransaction(@RequestBody Transaction transaction) {
-           return transactionService.addTransaction(transaction);
-       }
-   */
+
     @PostMapping("/add")
     public ResponseEntity<String> addTransactionAndUpdateNbTransactions(@RequestBody Transaction transaction) {
         try {

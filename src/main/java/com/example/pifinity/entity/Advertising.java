@@ -23,7 +23,7 @@ public class Advertising implements Serializable {
         private String titre;
         @JsonIgnore
         @ToString.Exclude
-        @OneToOne(mappedBy="advertising")
+        @OneToOne
         private Partner partner;
         @JsonIgnore
         @ToString.Exclude

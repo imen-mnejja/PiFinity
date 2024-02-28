@@ -7,8 +7,9 @@ import java.util.List;
 
 public interface IJobOfferService {
     List<JobOffer> findAllJobOffers();
-    JobOffer addJobOffer(JobOffer jobOffer);
+    JobOffer addJobOffer(Long partnerid ,JobOffer jobOffer);
     JobOffer updateJobOffer (Long jobid ,JobOffer jobOffer);
     JobOffer findByIdJobOffer (Long jobid);
     void deleteJobOffer(Long jobid);
+
 }

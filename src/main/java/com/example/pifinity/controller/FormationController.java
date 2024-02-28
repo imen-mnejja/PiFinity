@@ -1,9 +1,9 @@
 package com.example.pifinity.controller;
 
 import com.example.pifinity.entity.Formation;
-import com.example.pifinity.entity.Partner;
 import com.example.pifinity.serviceInterface.IFormationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,9 +23,10 @@ public class FormationController {
         return formationService.findByIdFormation(formationid);
     }
 
-    @PostMapping()
-    public Formation addFormation(@RequestBody Formation formation) {
-        return formationService.addFormation(formation);
+    @PostMapping("/{partnerid}")
+    public ResponseEntity<Formation> addFormation(@PathVariable Long partnerid, @RequestBody Formation formation) {
+        Formation addedformation= formationService.addFormation(partnerid,formation);
+        return ResponseEntity.ok().body(addedformation);
     }
 
     @PutMapping("/{formationid}")
