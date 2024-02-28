@@ -70,7 +70,7 @@ public class TransactionController {
     }
 
 
-
+/*sdfsdfsf */
 
     @GetMapping("/transactionbyaccount/{rib_s}")
     public List<Transaction> findByAccount(@PathVariable("rib_s") int rib_s){
