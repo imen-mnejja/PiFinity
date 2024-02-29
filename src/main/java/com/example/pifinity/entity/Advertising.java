@@ -30,4 +30,5 @@ public class Advertising implements Serializable {
         @OneToMany(cascade = CascadeType.ALL)
         private Set<Comment> Comments;
 }
+/*******/
 
