@@ -13,6 +13,8 @@ public interface ITransactionService {
 
     List<Transaction> retrieveAllTransactionbyBankAccount(int id);
 
+    List<Transaction> retrieveAllTransactionbySubAccount(int id);
+
     int calculatetransaction(int rib_s,int rib_d);
 
     int splittransaction(int code, int amount) throws MessagingException;
@@ -26,8 +28,10 @@ public interface ITransactionService {
     void deleteTransaction(int idtransaction);
     Transaction retrieveTransaction(int idtransaction);
 
+    Transaction addtr(Transaction t);
 
 
+    double calcule(int id);
 
 
 

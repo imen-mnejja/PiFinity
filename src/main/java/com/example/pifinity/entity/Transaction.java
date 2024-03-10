@@ -7,6 +7,7 @@ import lombok.*;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor
@@ -20,7 +21,7 @@ public class Transaction {
     private int idTransaction;
     private float amount;
 
-    private LocalDate DateTransaction;
+    private LocalDateTime DateTransaction;
 
     private int RIB_S ;
     private int RIB_D;

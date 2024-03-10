@@ -38,6 +38,12 @@ public class TransactionController {
         return transactionService.addTransaction(numcard,password,confirmpassword,cvv,transaction);
     }
 
+    @PostMapping("/addtr")
+    public Transaction addtr(@RequestBody Transaction t){
+
+        return transactionService.addtr(t);
+    }
+
     @PostMapping("/addtransaction/{numcard}/{password}/{cvv}")
     public Transaction addt(@PathVariable int numcard,@PathVariable int password,@PathVariable int cvv,@RequestBody Transaction transaction) throws MessagingException {
         return transactionService.addt(numcard,password,cvv,transaction);
@@ -70,14 +76,25 @@ public class TransactionController {
     }
 
 
-/*sdfsdfsf */
+
 
     @GetMapping("/transactionbyaccount/{rib_s}")
     public List<Transaction> findByAccount(@PathVariable("rib_s") int rib_s){
-        return transactionService.retrieveAllTransactionbyBankAccount(rib_s);}
+        return transactionService.retrieveAllTransactionbyBankAccount(rib_s);
+    }
+
+    @GetMapping("/transactionbysubaccount/{rib_s}")
+    public List<Transaction> findBySubBankAccount(@PathVariable("rib_s") int rib_s){
+        return transactionService.retrieveAllTransactionbySubAccount(rib_s);
+    }
 
     @GetMapping("/calculatetransaction/{rib_s}/{rib_d}")
     public int calculatetransaction(@PathVariable("rib_s") int rib_s,@PathVariable("rib_d") int rib_d){
         return transactionService.calculatetransaction(rib_s,rib_d);}
+
+
+    @GetMapping("/epargne/{id}")
+    public double calcule(@PathVariable("id") int id) {
+        return transactionService.calcule(id);}
 
 }

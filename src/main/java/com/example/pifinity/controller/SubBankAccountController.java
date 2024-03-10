@@ -25,13 +25,13 @@ public class SubBankAccountController {
         return subBankAccountService.retrieveAllSubBankAccount();}
 
     @GetMapping("/{subbankaccountid}")
-    public SubBankAccount findByIdSubBankAccount(@PathVariable("bankaccountid") int id){
+    public SubBankAccount findByIdSubBankAccount(@PathVariable("subbankaccountid") int id){
         return subBankAccountService.retrieveSubBankAccount(id);}
 
 
-    @PostMapping("/addsubbankaccount")
-    public SubBankAccount addSubBankAccount(@RequestBody SubBankAccount subbankAccount) {
-        return subBankAccountService.addSubBankAccount(subbankAccount);
+    @PostMapping("/addsubbankaccount/{rib}")
+    public SubBankAccount addSubBankAccount(@PathVariable int rib,@RequestBody SubBankAccount subbankAccount) {
+        return subBankAccountService.addSubBankAccount( rib,subbankAccount);
     }
 
 
@@ -44,6 +44,10 @@ public class SubBankAccountController {
     public void deleteBankAccount(@PathVariable("subbankaccountid") int subbankaccountid) {
         subBankAccountService.deleteSubBankAccount(subbankaccountid);
     }
+
+   /*@GetMapping("/epargne/{id}")
+    public double calcule(@PathVariable("id") int id) {
+        return subBankAccountService.calcule(id);}*/
 
 
     @GetMapping("/allsubbankaccountbyorder")

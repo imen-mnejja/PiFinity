@@ -8,7 +8,7 @@ import java.util.List;
 public interface ISubBankAccountService {
     List<SubBankAccount> retrieveAllSubBankAccount();
 
-    SubBankAccount addSubBankAccount(SubBankAccount subBankAccount);
+    SubBankAccount addSubBankAccount(int rib,SubBankAccount subBankAccount);
 
     SubBankAccount updateSubBankAccount(int id,SubBankAccount subBankAccount);
 
@@ -18,6 +18,7 @@ public interface ISubBankAccountService {
 
     List<SubBankAccount> retrieveAllSubBankAccountByOrder();
 
+    // double calcule(int id);
 
 
 }
