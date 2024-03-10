@@ -46,6 +46,7 @@ public class TransactionServiceImpl implements ITransactionService {
     public double calcule(int id ){
 
         List<Transaction> transactions = retrieveAllTransactionbySubAccount(id);
+        List<Configbank> cbs=configBankService.retrieveAllConfigBank();
         SubBankAccount subBankAccount= subBankAccountService.retrieveSubBankAccount(id);
         float goneamount=0;
         float recieveamount=0;
@@ -65,14 +66,16 @@ public class TransactionServiceImpl implements ITransactionService {
         System.out.println("firstamount: " + firstamount);
         double totalInterest = 0;
 
-        Configbank cb=configBankService.retrieveConfigbank(1);
+       /* Configbank cb=configBankService.retrieveConfigbank(1);
 
         float interet = cb.getInteret();
-        float abb = interet/100;
+        float abb = interet/100;*/
 
         for (int i = 0; i < transactions.size(); i++) {
             Transaction transaction = transactions.get(i);
             LocalDateTime transactionDate = transaction.getDateTransaction();
+
+
             double dailyInterest;
             LocalDate startDate;
             LocalDate endDate;
@@ -80,6 +83,15 @@ public class TransactionServiceImpl implements ITransactionService {
             if (i == 0) {
                 startDate = LocalDate.of(transactionDate.getYear(), 1, 1);
                 days = (int) ChronoUnit.DAYS.between(startDate, transactionDate.plusDays(1));
+                final LocalDateTime az=startDate.atStartOfDay();
+                Configbank lastConfigbank = cbs.stream()
+                        .filter(configbank -> configbank.getDateCreation().isBefore(az))
+                        .max(Comparator.comparing(Configbank::getDateCreation))
+                        .orElse(null);
+                float interset=lastConfigbank.getInteret();
+                System.out.println(interset);
+                float abb=interset/100;
+
                  dailyInterest = (firstamount * abb * days) / 360; // Assuming 360-day year
                 System.out.println(i);
                 System.out.println(dailyInterest);
@@ -89,6 +101,16 @@ public class TransactionServiceImpl implements ITransactionService {
                 LocalDateTime previousTransactionDate = transactions.get(i - 1).getDateTransaction();
                 startDate = previousTransactionDate.plusDays(1).toLocalDate();
                 days = (int) ChronoUnit.DAYS.between(startDate, transactionDate.plusDays(1));
+
+                final LocalDateTime abz=startDate.atStartOfDay();
+                Configbank lastConfigbank = cbs.stream()
+                        .filter(configbank -> configbank.getDateCreation().isBefore(abz))
+                        .max(Comparator.comparing(Configbank::getDateCreation))
+                        .orElse(null);
+                float interset=lastConfigbank.getInteret();
+                System.out.println(interset);
+                float abb=interset/100;
+
                 dailyInterest = (firstamount * abb * days) / 360; // Assuming 360-day year
                 System.out.println(i);
                 System.out.println(dailyInterest);
@@ -98,12 +120,23 @@ public class TransactionServiceImpl implements ITransactionService {
 
             totalInterest += dailyInterest;
             firstamount += transaction.getAmount(); // Update the current balance
+
             if (i==transactions.size()-1){
                 LocalDateTime previousTransactionDate = transactions.get(i-1).getDateTransaction();
                 startDate = previousTransactionDate.plusDays(1).toLocalDate();
 
                 endDate = LocalDate.of(transactionDate.getYear(), 12, 31);
                 days = (int) ChronoUnit.DAYS.between(startDate, endDate);
+
+                final LocalDateTime abbz=startDate.atStartOfDay();
+                Configbank lastConfigbank = cbs.stream()
+                        .filter(configbank -> configbank.getDateCreation().isBefore(abbz))
+                        .max(Comparator.comparing(Configbank::getDateCreation))
+                        .orElse(null);
+                float interset=lastConfigbank.getInteret();
+                System.out.println(interset);
+
+                float abb=interset/100;
                 dailyInterest = (firstamount * abb * days) / 360; // Assuming 360-day year
                 totalInterest += dailyInterest;
                 firstamount += transaction.getAmount();
