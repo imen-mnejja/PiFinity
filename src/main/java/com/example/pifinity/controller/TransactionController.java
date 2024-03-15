@@ -95,6 +95,6 @@ public class TransactionController {
 
     @GetMapping("/epargne/{id}")
     public double calcule(@PathVariable("id") int id) {
-        return transactionService.calcule(id);}
+        return transactionService.CalculeEpargne(id);}
 
 }

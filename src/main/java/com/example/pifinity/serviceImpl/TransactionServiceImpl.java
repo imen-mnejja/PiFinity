@@ -43,7 +43,7 @@ public class TransactionServiceImpl implements ITransactionService {
 
 
     @Override
-    public double calcule(int id ){
+    public double CalculeEpargne(int id ){
 
         List<Transaction> transactions = retrieveAllTransactionbySubAccount(id);
         List<Configbank> cbs=configBankService.retrieveAllConfigBank();
@@ -208,14 +208,16 @@ public class TransactionServiceImpl implements ITransactionService {
     transaction.setRIB_S(virtualBankCard.getBankAccount().getRIB());
     transaction.setDateTransaction(LocalDateTime.now());
 
+    Configbank cb=configBankService.retrieveConfigbank(1);
+
 
     float weeklyLimit = 0;
     switch (virtualBankCard.getTypecard()) {
         case silver:
-            weeklyLimit = 700;
+            weeklyLimit = cb.getWeeklyLimiteSiliver();
             break;
         case gold:
-            weeklyLimit = 1700;
+            weeklyLimit = cb.getWeeklyLimiteGold();
             break;
         case premieum:
             // No limit for premium cards

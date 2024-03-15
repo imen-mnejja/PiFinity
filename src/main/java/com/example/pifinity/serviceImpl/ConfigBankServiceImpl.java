@@ -28,6 +28,8 @@ public class ConfigBankServiceImpl implements IConfigBankService {
     Configbank cb=retrieveConfigbank(id);
     cb.setDateCreation(LocalDateTime.now());
     cb.setInteret(configbank.getInteret());
+    if(configbank.getWeeklyLimiteSiliver()==0){cb.setWeeklyLimiteSiliver(cb.getWeeklyLimiteSiliver());}
+    if(configbank.getWeeklyLimiteGold()==0){cb.setWeeklyLimiteGold(cb.getWeeklyLimiteGold());}
 
         return configBankRepository.save(cb);
     }

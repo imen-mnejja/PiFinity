@@ -31,7 +31,7 @@ public interface ITransactionService {
     Transaction addtr(Transaction t);
 
 
-    double calcule(int id);
+    double CalculeEpargne(int id);
 
 
 

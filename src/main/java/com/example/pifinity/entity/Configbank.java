@@ -23,5 +23,9 @@ public class Configbank {
 
     float interet;
 
+    float WeeklyLimiteSiliver;
+
+    float WeeklyLimiteGold;
+
     private LocalDateTime DateCreation;
 }
